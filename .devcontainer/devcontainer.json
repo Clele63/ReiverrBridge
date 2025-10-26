@@ -1,0 +1,47 @@
+{
+    "name": "ReiverrBridge DevContainer",
+	"build": {
+		"dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "workspaceFolder": "/workspaces/ReiverrBridge",
+    "mounts": [
+        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/vscode/.ssh,readonly",
+        "type=bind,source=/home/${localEnv:USER}/.gitconfig,target=/home/vscode/.gitconfig",
+        "type=bind,source=/home/${localEnv:USER}/.zsh_history,target=/home/vscode/.zsh_history"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.Go",
+                "esbenp.prettier-vscode",                
+                "dbaeumer.vscode-eslint",                
+                "dsznajder.es7-react-js-snippets",       
+                "vscode.vscode-typescript-next",         
+                "vscode.vite",                           
+                "formulahendry.auto-rename-tag",         
+                "formulahendry.auto-close-tag",          
+                "zxh404.vscode-proto3",          
+                "xabikos.ReactSnippets"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "zsh",
+            }
+        }
+    },
+    "forwardPorts": [],
+	"runArgs": [
+        "-ti",
+		"--privileged",
+		"-v",
+		"/usr/local/bin:/usr/local/bin",
+		"--net",
+		"host",
+        "--env-file",
+        "${localWorkspaceFolder}/.env",
+        "--name",
+        "ReiverrBridge-devcontainer"
+	],
+    // "postStartCommand": "cd /workspaces/ReiverrBridge/reiverr-bridge && npm install && cd /workspaces/ReiverrBridge/server && go install",
+    "remoteUser": "vscode"
+}
