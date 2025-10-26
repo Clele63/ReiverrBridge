@@ -1,0 +1,30 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Server",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/back",
+      "args": [],
+      "env": {
+        "GO111MODULE": "on",
+      },
+    },
+    {
+      "name": "ReiverrBridge",
+      "request": "launch",
+      "runtimeArgs": [
+        "run",
+        "dev",
+      ],
+      "runtimeExecutable": "npm",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node",
+      "cwd": "${workspaceFolder}/reiverr-bridge",
+    },
+  ]
+}
