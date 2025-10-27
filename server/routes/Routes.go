@@ -1,18 +1,17 @@
 package routes
 
 import (
+	"workbench/reiverrbridge/media"
 	"workbench/reiverrbridge/webdav"
 
 	"github.com/gin-gonic/gin"
 )
 
-func InitRouter() *gin.Engine {
-	r := gin.Default()
-
+func InitRouter(r *gin.Engine) {
 	r.Use(func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(204)
 			return
@@ -27,6 +26,8 @@ func InitRouter() *gin.Engine {
 	{
 		webdav.RegisterRoutes(webdavGroup)
 	}
-
-	return r
+	mediaGroup := v1.Group("/media")
+	{
+		media.RegisterRoutes(mediaGroup)
+	}
 }

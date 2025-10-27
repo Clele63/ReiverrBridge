@@ -1,6 +1,7 @@
 package resources
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/studio-b12/gowebdav"
@@ -12,6 +13,7 @@ func ListFiles(client *gowebdav.Client, path string) ([]string, error) {
 		log.Printf("WebDAV Error: %v", err)
 		return nil, err
 	}
+	fmt.Println(files)
 
 	var filenames []string
 	for _, file := range files {
